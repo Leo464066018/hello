@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block title %}登录{% endblock%}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-xs-10 col-xs-offset-1 col-sm-4 col-sm-offset-4">
+            <div class="panel panel-default">
+                <div class="panel-heading">登录</div>
+                <div class="panel-body">
+                    <form action="" method="POST">
+                        {% csrf_token %}
+                        {{ login_form }}
+                        <input type="submit" value="登录" class="btn btn-primary pull-right">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
