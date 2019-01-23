@@ -1,0 +1,31 @@
+{%  extends 'base.html' %}
+
+{% block first_active %}{% endblock %}
+{% block dropdown_active %}active{% endblock %}
+{% block operate_active %}active{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-4 col-xs-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">操作</div>
+                <div class="panel-body">
+                    <form action="{% url 'do_operate' %}" method="post">
+                        <div class="form-group">
+                            {{ operate_form }}
+                            <button type="submit" class="btn btn-default center-block">确定</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8 col-xs-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">记录</div>
+                <div class="panel-body"></div>
+            </div>
+        </div>
+    </div><!-- row -->
+</div><!-- container-fluid -->
+{% endblock %}
