@@ -47,12 +47,13 @@ class OperateForm(forms.ModelForm):
             ),
             'operate': forms.Select(
                 attrs={
-                    'class': 'form-control'
+                    'class': 'form-control',
                 }
             ),
             'num': forms.NumberInput(
                 attrs={
-                    'class': 'form-control'
+                    'class': 'form-control',
+                    'autocomplete': 'off',
                 }
             ),
         }

@@ -12,18 +12,41 @@
                 <div class="panel-heading">操作</div>
                 <div class="panel-body">
                     <form action="{% url 'do_operate' %}" method="post">
+                        {% csrf_token %}
                         <div class="form-group">
                             {{ operate_form }}
                             <button type="submit" class="btn btn-default center-block">确定</button>
                         </div>
+                        {% for message in messages %}
+                            <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+                        {% endfor %}
                     </form>
                 </div>
             </div>
         </div>
         <div class="col-md-8 col-xs-12">
             <div class="panel panel-default">
-                <div class="panel-heading">记录</div>
-                <div class="panel-body"></div>
+                <div class="panel-heading">最近十条操作记录</div>
+                <div class="panel-body">
+                    <table class="table">
+                        <tr>
+                            <th>配件</th>
+                            <th>操作</th>
+                            <th>数目</th>
+                            <th>操作日期</th>
+                        </tr>
+                        {% for operation in operations %}
+                        <tr>
+                            <td>{{ operation.item }}</td>
+                            <td>{{ operation.get_operate_display }}</td>
+                            <td>{{ operation.num }}</td>
+                            <td>{{ operation.operated_time|date:"Y-m-d H:i:s" }}</td>
+                        </tr>
+                        {% empty %}
+                        <tr>暂无记录</tr>
+                        {% endfor %}
+                    </table>
+                </div>
             </div>
         </div>
     </div><!-- row -->
