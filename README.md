@@ -1,2 +1,2 @@
-# hello world! added by mbp! added bu linux!
+# hello 
 ailv item manage system(AIMS)
