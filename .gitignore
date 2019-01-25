@@ -1,3 +1,5 @@
 .idea/
 uwsgi/
 collectstatic/
+__pycache__/
+makemigrations/
