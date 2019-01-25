@@ -2,4 +2,3 @@
 uwsgi/
 collectstatic/
 __pycache__/
-makemigrations/
