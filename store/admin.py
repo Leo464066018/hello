@@ -5,7 +5,7 @@ from .models import Item, Operation
 
 @admin.register(Item)
 class ItemAdmin(admin.ModelAdmin):
-    list_display = ('name', 'qty', 'city', 'modify_date', 'who_does')
+    list_display = ('name', 'qty', 'city', 'who_does')
 
 
 @admin.register(Operation)

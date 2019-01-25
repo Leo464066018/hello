@@ -17,7 +17,8 @@ class Item(models.Model):
         return self.name
 
     class Meta:
-        verbose_name_plural = '配件库'
+        verbose_name = "配件"
+        verbose_name_plural = verbose_name 
 
 
 class Operation(models.Model):
