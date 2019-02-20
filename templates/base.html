@@ -37,9 +37,7 @@
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">管理<span class="caret"></span></a>
                   <ul class="dropdown-menu">
                     <li class="{% block operate_active %}{% endblock %}"><a href="{% url 'do_operate' %}">配件管理</a></li>
-                    <li><a href="#">发货管理</a></li>
-                   <!-- <li role="separator" class="divider"></li>
-                    <li><a href="#">发货记录</a></li> -->
+                    <li class="{% block post_active%}{% endblock %}"><a href="{% url 'do_post' %}">发货管理</a></li>
                   </ul>
                 </li>
             </ul>

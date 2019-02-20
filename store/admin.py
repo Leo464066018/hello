@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Item, Operation
+from .models import Item, Operation, PostManage
 # Register your models here.
 
 
@@ -12,3 +12,6 @@ class ItemAdmin(admin.ModelAdmin):
 class OperationAdmin(admin.ModelAdmin):
     list_display = ('id', 'item', 'operated_time')
 
+@admin.register(PostManage)
+class PostManageAdmin(admin.ModelAdmin):
+    list_display = ('post_num', 'server_type', 'server_num', 'post_date', 'note_text')

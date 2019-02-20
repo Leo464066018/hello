@@ -3,8 +3,8 @@ from django.contrib import messages
 from django.contrib.auth import login
 from django.db.models import F
 from django.contrib.auth.decorators import login_required
-from .models import Item, Operation
-from .forms import LoginForm, OperateForm
+from .models import Item, Operation, PostManage
+from .forms import LoginForm, OperateForm, PostForm
 # Create your views here.
 
 
@@ -86,3 +86,20 @@ def do_operate(request):
     }
 
     return render(request, 'store/operate.html', context)
+
+
+@login_required
+def do_post(request):
+    posts = PostManage.objects.all()
+    if request.method == 'POST':
+        post_form = PostForm(request.POST)
+
+    else:
+        post_form = PostForm()
+    
+    context = {
+        'posts': posts,
+        'post_form': post_form,
+    }
+
+    return render(request, 'store/postmanage.html', context)

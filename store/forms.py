@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth import authenticate, login
-from .models import Operation, Item
+from .models import Operation, Item, PostManage
 
 
 class LoginForm(forms.Form):
@@ -56,4 +56,34 @@ class OperateForm(forms.ModelForm):
                     'autocomplete': 'off',
                 }
             ),
+        }
+
+
+class PostForm(forms.ModelForm):
+    class Meta:
+        model = PostManage
+        fields = ('post_num', 'server_type', 'server_num', 'note_text')
+        widgets = {
+            'post_num': forms.NumberInput(
+                attrs={
+                    'class': 'form-control',
+                    'autocomplete': 'off',
+                }
+            ),
+            'server_type': forms.Select(
+                attrs={
+                    'class': 'form-control',
+                }
+            ),
+            'server_num': forms.NumberInput(
+                attrs={
+                    'class': 'form-control',
+                    'autocomplete': 'off',
+                }
+            ),
+            'note_text': forms.TextInput(
+                attrs={
+                    'class': 'form-control',
+                }
+            )
         }
