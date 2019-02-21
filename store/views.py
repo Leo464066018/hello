@@ -90,9 +90,64 @@ def do_operate(request):
 
 @login_required
 def do_post(request):
+
+    video = {
+        '视频服务器外壳': 1,
+        '大华电源适配器': 1,
+        '内置型4G天线': 1,
+        '4G模块': 1,
+        'RF射频SMA-KKY母对母转接头': 1,
+        '劲霸18650锂电池': 2,
+        '视频服务器主板固定板': 1,
+        '视频服务器摄像头固定板': 1,
+        '电池盒': 1,
+        '探针板': 1,
+        '主板': 1,
+        'CR1220锂电池': 1,
+        '树莓派': 1,
+        '树莓派摄像头': 2,
+        '2.4G小辣椒wifi天线': 2,
+        '射频线SMA公针-SMA公针15cm': 2,
+        '自攻螺丝M2.6*6': 4,
+        '六角铜柱(双通M3*10)': 6,
+        '六角铜柱(单头螺栓M3*18+4)': 6,
+        '六角螺母M2': 8,
+        '平头螺丝M2*10': 8,
+        '尼龙双通六角柱M2*6': 8,
+    }
+
+    wifi = {
+        '4G模块': 1,
+        '劲霸18650锂电池': 2,
+        '电池盒': 1,
+        '探针板': 1,
+        '主板': 1,
+        'CR1220锂电池': 1,
+        '树莓派': 1,
+    }
+
     posts = PostManage.objects.all()
     if request.method == 'POST':
         post_form = PostForm(request.POST)
+        if post_form.is_valid():
+            post_num = post_form.cleaned_data['post_num']
+            server_type = post_form.cleaned_data['server_type']
+            server_num = post_form.cleaned_data['server_num']
+            note_text = post_form.cleaned_data['note_text']
+            post_date = post_form.cleaned_data['post_date']
+            post_manage = PostManage()
+            post_manage.post_num = post_num
+            post_manage.server_type = server_type
+            post_manage.server_num = server_num
+            post_manage.note_text = note_text
+            post_manage.post_date = post_date
+            post_manage.save()
+            if server_type == 'video':
+                for key in video.keys():
+                    reduce_item(key, video[key], server_num)
+            else:
+                for key in wifi.keys():
+                    reduce_item(key, wifi[key], server_num)
 
     else:
         post_form = PostForm()
@@ -103,3 +158,10 @@ def do_post(request):
     }
 
     return render(request, 'store/postmanage.html', context)
+
+
+# 查询配件，减去配件数量
+def reduce_item(name, num, server_num):
+    item = Item.objects.get(name=name)
+    item.qty -= num * server_num
+    item.save(update_fields=['qty'])

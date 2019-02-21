@@ -36,16 +36,14 @@ class Operation(models.Model):
         verbose_name_plural = verbose_name
         ordering = ('-operated_time',)
 
+
 class PostManage(models.Model):
-    SERVERTYPES = (('wifi','wifi服务器'),('video','视频服务器'))
+    SERVERTYPES = (('wifi', 'wifi服务器'), ('video', '视频服务器'))
     post_num = models.IntegerField(verbose_name='单号')
-    post_date = models.DateTimeField(verbose_name='发货日期')
+    post_date = models.DateField(verbose_name='发货日期')
     server_type = models.CharField(max_length=20, choices=SERVERTYPES, verbose_name='型号')
     server_num = models.IntegerField(verbose_name='数量')
     note_text = models.CharField(max_length=128, verbose_name='备注')
-
-    def __str__(self):
-        return self.post_num
 
     class Meta:
         verbose_name = '发货记录'

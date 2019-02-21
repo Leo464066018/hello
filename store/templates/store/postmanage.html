@@ -30,7 +30,7 @@
                 <div class="panel-body">
                     <table class="table">
                         <tr>
-                            <th>发货日期</th>
+                            <th>发货单号</th>
                             <th>发货类型</th>
                             <th>发货数量</th>
                             <th>发货日期</th>
@@ -39,7 +39,7 @@
                         {% for p in posts %}
                         <tr>
                             <td>{{ p.post_num }}</td>
-                            <td>{{ p.server_type }}</td>
+                            <td>{{ p.get_server_type_display }}</td>
                             <td>{{ p.server_num }}</td>
                             <td>{{ p.post_date }}</td>
                             <td>{{ p.note_text }}</td>

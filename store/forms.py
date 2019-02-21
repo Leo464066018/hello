@@ -62,7 +62,7 @@ class OperateForm(forms.ModelForm):
 class PostForm(forms.ModelForm):
     class Meta:
         model = PostManage
-        fields = ('post_num', 'server_type', 'server_num', 'note_text')
+        fields = ('post_num', 'server_type', 'server_num', 'note_text', 'post_date')
         widgets = {
             'post_num': forms.NumberInput(
                 attrs={
@@ -84,6 +84,12 @@ class PostForm(forms.ModelForm):
             'note_text': forms.TextInput(
                 attrs={
                     'class': 'form-control',
+                }
+            ),
+            'post_date': forms.DateInput(
+                attrs={
+                    'class': 'form-control',
+                    'type': 'date',
                 }
             )
         }
