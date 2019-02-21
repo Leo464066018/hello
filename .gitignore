@@ -3,3 +3,5 @@ uwsgi/
 collectstatic/
 __pycache__/
 db.sqlite3
+django_nginx.conf
+nohup.out
