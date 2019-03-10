@@ -38,7 +38,7 @@ class LoginForm(forms.Form):
 class OperateForm(forms.ModelForm):
     class Meta:
         model = Operation
-        fields = ('item', 'operate', 'num')
+        fields = ('item', 'operate', 'num', 'note')
         widgets = {
             'item': forms.Select(
                 attrs={
@@ -56,6 +56,11 @@ class OperateForm(forms.ModelForm):
                     'autocomplete': 'off',
                 }
             ),
+            'note': forms.TextInput(
+                attrs={
+                    'class': 'form-control',
+                }
+            )
         }
 
 
@@ -89,7 +94,7 @@ class PostForm(forms.ModelForm):
             'post_date': forms.DateInput(
                 attrs={
                     'class': 'form-control',
-                    'type': 'date',
+                    'placeholder': '格式：2018/1/1',
                 }
             )
         }

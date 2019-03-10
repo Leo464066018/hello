@@ -1,7 +1,6 @@
 {%  extends 'base.html' %}
 
 {% block first_active %}{% endblock %}
-{% block dropdown_active %}active{% endblock %}
 {% block operate_active %}active{% endblock %}
 
 {% block content %}
@@ -34,6 +33,7 @@
                             <th>操作</th>
                             <th>数目</th>
                             <th>操作日期</th>
+                            <th>备注</th>
                         </tr>
                         {% for operation in operations %}
                         <tr>
@@ -41,6 +41,7 @@
                             <td>{{ operation.get_operate_display }}</td>
                             <td>{{ operation.num }}</td>
                             <td>{{ operation.operated_time|date:"Y-m-d H:i:s" }}</td>
+                            <td>{{ operation.note }}</td>
                         </tr>
                         {% empty %}
                         <tr>暂无记录</tr>

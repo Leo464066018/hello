@@ -27,6 +27,7 @@ class Operation(models.Model):
     operate = models.CharField(max_length=8, choices=OPERATIONS, verbose_name='操作')
     num = models.IntegerField(verbose_name='数目')
     operated_time = models.DateTimeField(auto_now_add=True, verbose_name='操作日期')
+    note = models.CharField(max_length=128, verbose_name='备注')
 
     def __str__(self):
         return self.item.name

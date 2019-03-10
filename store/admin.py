@@ -10,7 +10,7 @@ class ItemAdmin(admin.ModelAdmin):
 
 @admin.register(Operation)
 class OperationAdmin(admin.ModelAdmin):
-    list_display = ('id', 'item', 'operated_time')
+    list_display = ('id', 'item', 'operated_time', 'note')
 
 @admin.register(PostManage)
 class PostManageAdmin(admin.ModelAdmin):

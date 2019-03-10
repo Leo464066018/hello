@@ -10,8 +10,10 @@ from .forms import LoginForm, OperateForm, PostForm
 
 def show(request):
     items = Item.objects.all()
+    postmanage = PostManage.objects.all()
     context = {
         'items': items,
+        'postmanage': postmanage,
     }
     return render(request, 'store/list.html', context)
 
@@ -54,6 +56,7 @@ def do_operate(request):
             operate_item = operate_form.cleaned_data['item']
             operate = operate_form.cleaned_data['operate']
             num = operate_form.cleaned_data['num']
+            note = operate_form.cleaned_data['note']
             item = Item.objects.get(name=operate_item)
             item_qty = item.qty
             if operate == 'plus':
@@ -63,6 +66,7 @@ def do_operate(request):
                     'item': operate_item,
                     'operate': operate,
                     'num': num,
+                    'note': note,
                 }
                 Operation.objects.create(**operation)
             else:
@@ -75,6 +79,7 @@ def do_operate(request):
                         'item': operate_item,
                         'operate': operate,
                         'num': num,
+                        'note': note,
                     }
                     Operation.objects.create(**operation)
     else:
@@ -96,7 +101,7 @@ def do_post(request):
         '大华电源适配器': 1,
         '内置型4G天线': 1,
         '4G模块': 1,
-        'RF射频SMA-KKY母对母转接头': 1,
+        'RF射频SMA-KKY母对母转接头': 2,
         '劲霸18650锂电池': 2,
         '视频服务器主板固定板': 1,
         '视频服务器摄像头固定板': 1,

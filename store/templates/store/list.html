@@ -21,3 +21,27 @@
     {% endfor%}
 </table>
 {% endblock %}
+
+
+{% block postmanage %}
+<table class="table">
+    <tr>
+        <th>发货单号</th>
+        <th>发货类型</th>
+        <th>发货数量</th>
+        <th>发货日期</th>
+        <th>备注</th>
+    </tr>
+    {% for pm in postmanage %}
+        <tr>
+            <td>{{ pm.post_num }}</td>
+            <td>{{ pm.get_server_type_display }}</td>
+            <td>{{ pm.server_num }}</td>
+            <td>{{ pm.post_date }}</td>
+            <td>{{ pm.note_text }}</td>
+        </tr>
+    {% empty %}
+        <h4>未查询到相关记录</h4>
+    {% endfor%}
+</table>
+{% endblock %}
