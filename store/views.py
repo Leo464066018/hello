@@ -119,7 +119,7 @@ def do_post(request):
         '六角螺母M2': 8,
         '平头螺丝M2*10': 8,
         '尼龙双通六角柱M2*6': 8,
-        '12VAC转2pin电源线': 1
+        '12VDC转2pin电源线': 1
     }
 
     wifi = {
@@ -127,9 +127,12 @@ def do_post(request):
         '劲霸18650锂电池': 2,
         '电池盒': 1,
         '探针板': 1,
-        '主板': 1,
+        '主板(有探针)': 1,
         'CR1220锂电池': 1,
         '树莓派': 1,
+        '射频线SMA公针-SMA公针40cm': 1,
+        'RF射频SMA-KKY母对母转接头': 1,
+        '2.4G小辣椒wifi天线': 1
     }
 
     posts = PostManage.objects.all()
