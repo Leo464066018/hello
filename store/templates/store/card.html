@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<table class="table">
+    <tr>
+        <th>设备ID</th>
+        <th>卡号</th>
+    </tr>
+    {% for box in boxes %}
+        <tr>
+            <td>{{ box.box_id }}</td>
+            <td>{{ box.sim_card }}</td>
+        </tr>
+    {% empty %}
+        <h4>未查询到相关记录</h4>
+    {% endfor %}
+</table>
+{% endblock %}
+
