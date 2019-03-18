@@ -3,7 +3,7 @@ from django.contrib import messages
 from django.contrib.auth import login
 from django.db.models import F
 from django.contrib.auth.decorators import login_required
-from .models import Item, Operation, PostManage
+from .models import Item, Operation, PostManage, Box
 from .forms import LoginForm, OperateForm, PostForm
 # Create your views here.
 
@@ -174,3 +174,11 @@ def reduce_item(name, num, server_num):
     item = Item.objects.get(name=name)
     item.qty -= num * server_num
     item.save(update_fields=['qty'])
+
+
+def card_record(request):
+    boxes = Box.objects.all()
+    context = {
+        'boxes': boxes,
+    }
+    return render(request, 'store/card.html', context)

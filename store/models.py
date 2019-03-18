@@ -3,6 +3,18 @@ from django.contrib.auth.models import User
 # Create your models here.
 
 
+class Box(models.Model):
+    box_id = models.CharField(max_length=8, verbose_name="设备ID")
+    sim_card = models.CharField(max_length=13, verbose_name="sim卡号")
+
+    def __str__(self):
+        return self.box_id
+
+    class Meta:
+        verbose_name = "sim卡"
+        verbose_name_plural = verbose_name
+
+
 class Item(models.Model):
     CHOICES = (('YZ', '扬州'), ('BJ', '北京'), ('CQ', '重庆'))
 
