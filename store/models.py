@@ -31,6 +31,7 @@ class Item(models.Model):
     class Meta:
         verbose_name = "配件"
         verbose_name_plural = verbose_name 
+        ordering=['qty']
 
 
 class Operation(models.Model):
