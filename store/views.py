@@ -1,7 +1,6 @@
 from django.shortcuts import render, redirect, reverse
 from django.contrib import messages
 from django.contrib.auth import login
-from django.db.models import F
 from django.contrib.auth.decorators import login_required
 from .models import Item, Operation, PostManage, Box
 from .forms import LoginForm, OperateForm, PostForm
@@ -10,10 +9,12 @@ from .forms import LoginForm, OperateForm, PostForm
 
 def show(request):
     items = Item.objects.all()
-    postmanage = PostManage.objects.all()
+    postmanage_sends = PostManage.objects.filter(post_type='send')
+    postmanage_receives = PostManage.objects.filter(post_type='receive')
     context = {
         'items': items,
-        'postmanage': postmanage,
+        'postmanage_sends': postmanage_sends,
+        'postmanage_receives': postmanage_receives,
     }
     return render(request, 'store/list.html', context)
 
@@ -138,23 +139,33 @@ def do_post(request):
         post_form = PostForm(request.POST)
         if post_form.is_valid():
             post_num = post_form.cleaned_data['post_num']
+            post_type = post_form.cleaned_data['post_type']
             server_type = post_form.cleaned_data['server_type']
             server_num = post_form.cleaned_data['server_num']
             note_text = post_form.cleaned_data['note_text']
             post_date = post_form.cleaned_data['post_date']
             post_manage = PostManage()
             post_manage.post_num = post_num
+            post_manage.post_type = post_type
             post_manage.server_type = server_type
             post_manage.server_num = server_num
             post_manage.note_text = note_text
             post_manage.post_date = post_date
             post_manage.save()
-            if server_type == 'video':
-                for key in video.keys():
-                    reduce_item(key, video[key], server_num)
+            if post_type == 'send':
+                if server_type == 'video':
+                    for key in video.keys():
+                        reduce_item(key, video[key], server_num)
+                else:
+                    for key in wifi.keys():
+                        reduce_item(key, wifi[key], server_num)
             else:
-                for key in wifi.keys():
-                    reduce_item(key, wifi[key], server_num)
+                if server_type == 'video':
+                    for key in video.keys():
+                        add_item(key, video[key], server_num)
+                else:
+                    for key in wifi.keys():
+                        add_item(key, wifi[key], server_num)
 
     else:
         post_form = PostForm()
@@ -171,6 +182,13 @@ def do_post(request):
 def reduce_item(name, num, server_num):
     item = Item.objects.get(name=name)
     item.qty -= num * server_num
+    item.save(update_fields=['qty'])
+
+
+# 查询配件，增加配件数量
+def add_item(name, num, server_num):
+    item = Item.objects.get(name=name)
+    item.qty += num * server_num
     item.save(update_fields=['qty'])
 
 

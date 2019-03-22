@@ -53,8 +53,10 @@ class Operation(models.Model):
 
 class PostManage(models.Model):
     SERVERTYPES = (('wifi', 'wifi服务器'), ('video', '视频服务器'))
+    SENDORRECEIVE = (('send', '发货'), ('receive', '回收'))
     post_num = models.IntegerField(verbose_name='单号')
     post_date = models.DateField(verbose_name='发货日期')
+    post_type = models.CharField(max_length=8, choices=SENDORRECEIVE, default='send', verbose_name='收寄类型')
     server_type = models.CharField(max_length=20, choices=SERVERTYPES, verbose_name='型号')
     server_num = models.IntegerField(verbose_name='数量')
     note_text = models.CharField(max_length=128, verbose_name='备注')

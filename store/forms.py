@@ -67,12 +67,17 @@ class OperateForm(forms.ModelForm):
 class PostForm(forms.ModelForm):
     class Meta:
         model = PostManage
-        fields = ('post_num', 'server_type', 'server_num', 'note_text', 'post_date')
+        fields = ('post_num', 'post_type', 'server_type', 'server_num', 'note_text', 'post_date')
         widgets = {
             'post_num': forms.NumberInput(
                 attrs={
                     'class': 'form-control',
                     'autocomplete': 'off',
+                }
+            ),
+            'post_type': forms.Select(
+                attrs={
+                    'class': 'form-control',
                 }
             ),
             'server_type': forms.Select(

@@ -27,14 +27,38 @@
 <table class="table">
     <tr>
         <th>发货单号</th>
-        <th>发货类型</th>
-        <th>发货数量</th>
+        <th>收发类型</th>
+        <th>设备类型</th>
+        <th>设备数量</th>
         <th>发货日期</th>
         <th>备注</th>
     </tr>
-    {% for pm in postmanage %}
+    {% for pm in postmanage_sends %}
         <tr>
             <td>{{ pm.post_num }}</td>
+            <td>{{ pm.get_post_type_display }}</td>
+            <td>{{ pm.get_server_type_display }}</td>
+            <td>{{ pm.server_num }}</td>
+            <td>{{ pm.post_date }}</td>
+            <td>{{ pm.note_text }}</td>
+        </tr>
+    {% empty %}
+        <h4>未查询到相关记录</h4>
+    {% endfor%}
+</table>
+<table class="table">
+    <tr>
+        <th>发货单号</th>
+        <th>收发类型</th>
+        <th>设备类型</th>
+        <th>设备数量</th>
+        <th>发货日期</th>
+        <th>备注</th>
+    </tr>
+    {% for pm in postmanage_receives %}
+        <tr>
+            <td>{{ pm.post_num }}</td>
+            <td>{{ pm.get_post_type_display }}</td>
             <td>{{ pm.get_server_type_display }}</td>
             <td>{{ pm.server_num }}</td>
             <td>{{ pm.post_date }}</td>

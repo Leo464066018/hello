@@ -30,14 +30,16 @@
                     <table class="table">
                         <tr>
                             <th>发货单号</th>
-                            <th>发货类型</th>
-                            <th>发货数量</th>
+                            <th>收发类型</th>
+                            <th>设备类型</th>
+                            <th>设备数量</th>
                             <th>发货日期</th>
                             <th>备注</th>
                         </tr>
                         {% for p in posts %}
                         <tr>
                             <td>{{ p.post_num }}</td>
+                            <td>{{ p.get_post_type_display }}</td>
                             <td>{{ p.get_server_type_display }}</td>
                             <td>{{ p.server_num }}</td>
                             <td>{{ p.post_date }}</td>
